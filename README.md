@@ -18,7 +18,7 @@ The domain [`infra3projectvladalinbosiiacs202.duckdns.org`](https://infra3projec
 ## How to Run the Project
 
 1. Run the project from the root directory:
-    ```sh
+    ```
     docker compose up --build
     ```
 2. Wait until all containers are "Started".
@@ -28,7 +28,7 @@ The domain [`infra3projectvladalinbosiiacs202.duckdns.org`](https://infra3projec
 ## Accessing the App
 
 Open in your browser:
-https://infra3projectvladalinbosiiacs202.duckdns.org/static/templates/index.html
+https://infra3projectvladalinbosiiacs202.duckdns.org
 
 ---
 
@@ -43,9 +43,7 @@ https://infra3projectvladalinbosiiacs202.duckdns.org/static/templates/index.html
 **All files and folders referenced by Docker Compose `volumes` are included in this zip:**
 - `nginx/nginx.conf`
 - `nginx/certs/`
-- `src/main/resources/static/js/`
-- `src/main/resources/static/css/`
-- `src/main/resources/static/templates/`
+- `/src/main/resources/static/`
 ---
 
 
