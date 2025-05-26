@@ -6,33 +6,12 @@
 
 ---
 
-## DNS and /etc/hosts Setup
-
-Before running locally, **add this line to your hosts file** (needed for HTTPS and DNS to work):
-
-**Linux/macOS:**  
-`sudo nano /etc/hosts`  
-Add:  
-127.0.0.1 infra3projectvladalinbosiiacs202.duckdns.org
-
-**Windows:**  
-Open `C:\Windows\System32\drivers\etc\hosts` as Administrator  
-Add:  
-127.0.0.1 infra3projectvladalinbosiiacs202.duckdns.org
+## DNS Setup
 
 
----
+The domain [`infra3projectvladalinbosiiacs202.duckdns.org`](https://infra3projectvladalinbosiiacs202.duckdns.org) is **already configured** to point to `127.0.0.1` (localhost).  
+**No DuckDNS setup is needed.**
 
-## Environment Variables
-
-1. Add `.env` in the project root.
-2. Paste these values into the `.env`:
-
-    ```
-    SPRING_DATASOURCE_URL=jdbc:postgresql://vb_db:5432/infra3project_vladalinbosiiacs202
-    SPRING_DATASOURCE_USERNAME=spring
-    SPRING_DATASOURCE_PASSWORD=spring
-    ```
 
 ---
 
@@ -51,16 +30,11 @@ Add:
 Open in your browser:
 https://infra3projectvladalinbosiiacs202.duckdns.org/static/templates/index.html
 
-
-- **Accept the browser security warning** (self-signed certificate for local assignment)
-- Use the professional dashboard to add and view students.
-
 ---
 
 ## SSL Certificates
 
-- Self-signed certs are included for local use (`nginx/certs/`).
-- For public deployment, it should use Let’s Encrypt + Certbot for real, trusted certificates.
+- Let's Encrypt certificates generated via Certbot are included in nginx/certs/ for secure HTTPS 
 
 ---
 
@@ -72,7 +46,6 @@ https://infra3projectvladalinbosiiacs202.duckdns.org/static/templates/index.html
 - `src/main/resources/static/js/`
 - `src/main/resources/static/css/`
 - `src/main/resources/static/templates/`
-
 ---
 
 
