@@ -35,4 +35,5 @@ out/
 
 ### VS Code ###
 .vscode/
-nginx/certs/
+nginx/certs/*
+!nginx/certs/
