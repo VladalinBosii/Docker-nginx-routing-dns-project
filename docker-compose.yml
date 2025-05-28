@@ -61,7 +61,7 @@ services:
     depends_on:
       duckdns:
         condition: service_completed_successfully
-    command: certonly -v --non-interactive --agree-tos --email vladalin.bosii@student.kdg.be --preferred-challenges dns --authenticator dns-duckdns --dns-duckdns-token "$DUCKDNS_TOKEN" -d "$SUBDOMAIN.duckdns.org"
+    command: certonly -v --non-interactive --agree-tos --email vladalin.bosii2@gmail.com --preferred-challenges dns --authenticator dns-duckdns --dns-duckdns-token "$DUCKDNS_TOKEN" -d "$SUBDOMAIN.duckdns.org"
 
   duckdns:
     image: alpine/curl

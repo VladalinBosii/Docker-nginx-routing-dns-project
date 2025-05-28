@@ -9,7 +9,7 @@
 ## DNS Setup
 
 
-The domain [`infra3vladalinbosii.duckdns.org`](https://infra3vladalinbosii.duckdns.org) is **already configured** to point to `127.0.0.1` (localhost).  
+The domain [`vladalinbosiiproject.duckdns.org`](https://vladalinbosiiproject.duckdns.org) is **already configured** to point to `127.0.0.1` (localhost).  
 **No DuckDNS setup is needed.**
 
 
@@ -28,7 +28,8 @@ The domain [`infra3vladalinbosii.duckdns.org`](https://infra3vladalinbosii.duckd
 ## Accessing the App
 
 Open in your browser:
-https://infra3vladalinbosii.duckdns.org
+https://vladalinbosiiproject.duckdns.org
+If it doesn't work to access the link from the first time, please refresh the page and it will work
 ---
 
 ## SSL Certificates and ENV file
