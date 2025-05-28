@@ -28,8 +28,9 @@ The domain [`vladalinbosiiproject.duckdns.org`](https://vladalinbosiiproject.duc
 ## Accessing the App
 
 Open in your browser:
-https://vladalinbosiiproject.duckdns.org
-If it doesn't work to access the link from the first time, please refresh the page and it will work
+- https://vladalinbosiiproject.duckdns.org
+- If it doesn't work to access the link from the first time, please refresh the page and it will work
+
 ---
 
 ## SSL Certificates and ENV file
