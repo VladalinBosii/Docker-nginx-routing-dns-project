@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     function fetchStudents() {
-        fetch('/app/api/students')
+        fetch('api/students')
             .then(res => res.json())
             .then(students => {
                 studentList.innerHTML = '';
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
             showAlert('warning', 'Please fill out all fields.');
             return;
         }
-        fetch('/app/api/students', {
+        fetch('api/students', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({name, email})

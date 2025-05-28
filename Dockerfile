@@ -1,8 +1,10 @@
-FROM gradle:8.7.0-jdk21 AS build
-COPY . /app
+FROM gradle:8.12.1-jdk21 AS build
 WORKDIR /app
-RUN gradle build -x test --no-daemon
+COPY . .
+RUN gradle bootJar --no-daemon
 
-FROM eclipse-temurin:21-jdk-alpine
+FROM eclipse-temurin:21-jre-alpine
+WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","app.jar"]

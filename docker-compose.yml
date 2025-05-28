@@ -1,13 +1,33 @@
-version: "3.9"
 services:
+  vb_proxy:
+    image: nginx:latest
+    container_name: vb_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/templates/:/etc/nginx/templates
+      - ./nginx/certs:/etc/letsencrypt
+    environment:
+      - SERV_ADDR=${SUBDOMAIN}.duckdns.org
+    networks:
+      - vb_net
+    depends_on:
+      vb_sslcert:
+        condition: service_completed_successfully
+      vb_app:
+        condition: service_started
+      vb_db:
+        condition: service_started
+
   vb_db:
     image: postgres:17.2-alpine
     container_name: vb_db
     restart: always
     environment:
-      POSTGRES_DB: infra3project_vladalinbosii_acs202
-      POSTGRES_USER: ${SPRING_DATASOURCE_USERNAME}
-      POSTGRES_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      POSTGRES_DB: ${PROJECT_DB}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     ports:
       - "5054:5432"
     volumes:
@@ -21,26 +41,31 @@ services:
       dockerfile: Dockerfile
     container_name: vb_app
     environment:
-      SPRING_DATASOURCE_URL: ${SPRING_DATASOURCE_URL}
-      SPRING_DATASOURCE_USERNAME: ${SPRING_DATASOURCE_USERNAME}
-      SPRING_DATASOURCE_PASSWORD: ${SPRING_DATASOURCE_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:postgresql://vb_db:5432/${PROJECT_DB}
+      SPRING_DATASOURCE_USERNAME: ${DB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD}
     networks:
       - vb_net
-
-  vb_proxy:
-    image: nginx:latest
-    container_name: vb_proxy
-    ports:
-      - "443:443"
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./nginx/certs:/etc/nginx/certs:ro
-      - ./src/main/resources/static:/usr/share/nginx/html/static:ro
     depends_on:
-      - vb_app
-      - vb_db
-    networks:
-      - vb_net
+      vb_sslcert:
+        condition: service_completed_successfully
+      vb_db:
+        condition: service_started
+
+  vb_sslcert:
+    build:
+      context: ./sslcert/
+      dockerfile: Dockerfile
+    volumes:
+      - ./nginx/certs:/etc/letsencrypt
+    depends_on:
+      duckdns:
+        condition: service_completed_successfully
+    command: certonly -v --non-interactive --agree-tos --email vladalin.bosii@student.kdg.be --preferred-challenges dns --authenticator dns-duckdns --dns-duckdns-token "$DUCKDNS_TOKEN" -d "$SUBDOMAIN.duckdns.org"
+
+  duckdns:
+    image: alpine/curl
+    command: curl -v "https://www.duckdns.org/update?domains=${SUBDOMAIN}&token=${DUCKDNS_TOKEN}&ip=${WEB_IP_ADDR}"
 
 volumes:
   vb_db_data:
